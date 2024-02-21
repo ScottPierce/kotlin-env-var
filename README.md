@@ -1,2 +1,2 @@
 # kotlin-env-var
-Kotlin multiplatform library for retrieving environment variables
+A simple Kotlin Multiplatform library for retrieving environment variables.
