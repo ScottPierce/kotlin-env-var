@@ -1,0 +1,22 @@
+name: Build
+
+on:
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: amazoncorretto:17
+    name: Build
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build app
+        run: ./gradlew build
