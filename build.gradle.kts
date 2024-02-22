@@ -59,7 +59,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompileCommon> {
 
 mavenPublishing {
 //    publishToMavenCentral(SonatypeHost.DEFAULT)
-    publishToMavenCentral(SonatypeHost.S01)
+    publishToMavenCentral(SonatypeHost.S01, automaticRelease = true)
 
     signAllPublications()
 
