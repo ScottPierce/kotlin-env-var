@@ -59,46 +59,46 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompileCommon> {
     }
 }
 
-mavenPublishing {
-    publishToMavenCentral(SonatypeHost.S01, automaticRelease = true)
+val ref = System.getenv()["GITHUB_REF"]
+if (System.getenv()["GITHUB_REF_TYPE"] == "branch" && ref?.startsWith("refs/tags/v") == true) {
+    val version = ref.removePrefix("refs/tags/v")
+    println("Releasing Version: $version")
 
-    signAllPublications()
+    mavenPublishing {
+        publishToMavenCentral(SonatypeHost.S01, automaticRelease = true)
 
-    val ref = System.getenv()["GITHUB_REF"]
-    if (System.getenv()["GITHUB_REF_TYPE"] == "branch" && ref?.startsWith("refs/tags/v") == true) {
-        val version = ref.removePrefix("refs/tags/v")
-        println("Releasing Version: $version")
+        signAllPublications()
 
         coordinates(
             groupId = "io.github.scottpierce",
             artifactId = "kotlin-env-var",
             version = version,
         )
-    }
 
-    pom {
-        name.set("Kotlin Environment Variables")
-        description.set("A Kotlin Multiplatform library for retrieving environment variables")
-        inceptionYear.set("2024")
-        url.set("https://github.com/ScottPierce/kotlin-env-var")
-        licenses {
-            license {
-                name.set("The Apache License, Version 2.0")
-                url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
-                distribution.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
-            }
-        }
-        developers {
-            developer {
-                id.set("ScottPierce")
-                name.set("Scott Pierce")
-                url.set("https://github.com/ScottPierce")
-            }
-        }
-        scm {
+        pom {
+            name.set("Kotlin Environment Variables")
+            description.set("A Kotlin Multiplatform library for retrieving environment variables")
+            inceptionYear.set("2024")
             url.set("https://github.com/ScottPierce/kotlin-env-var")
-            connection.set("scm:git:git://github.com/ScottPierce/kotlin-env-var.git")
-            developerConnection.set("scm:git:ssh://git@github.com/ScottPierce/kotlin-env-var.git")
+            licenses {
+                license {
+                    name.set("The Apache License, Version 2.0")
+                    url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                    distribution.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                }
+            }
+            developers {
+                developer {
+                    id.set("ScottPierce")
+                    name.set("Scott Pierce")
+                    url.set("https://github.com/ScottPierce")
+                }
+            }
+            scm {
+                url.set("https://github.com/ScottPierce/kotlin-env-var")
+                connection.set("scm:git:git://github.com/ScottPierce/kotlin-env-var.git")
+                developerConnection.set("scm:git:ssh://git@github.com/ScottPierce/kotlin-env-var.git")
+            }
         }
     }
 }
