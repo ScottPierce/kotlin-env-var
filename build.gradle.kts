@@ -64,11 +64,17 @@ mavenPublishing {
 
     signAllPublications()
 
-    coordinates(
-        groupId = "io.github.scottpierce",
-        artifactId = "kotlin-env-var",
-        version = "1.0.0",
-    )
+    val ref = System.getenv()["GITHUB_REF"]
+    if (System.getenv()["GITHUB_REF_TYPE"] == "branch" && ref?.startsWith("refs/tags/v") == true) {
+        val version = ref.removePrefix("refs/tags/v")
+        println("Releasing Version: $version")
+
+        coordinates(
+            groupId = "io.github.scottpierce",
+            artifactId = "kotlin-env-var",
+            version = version,
+        )
+    }
 
     pom {
         name.set("Kotlin Environment Variables")
