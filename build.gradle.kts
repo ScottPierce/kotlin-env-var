@@ -15,7 +15,13 @@ repositories {
 }
 
 kotlin {
-    jvm()
+    jvm {
+        compilations.all {
+            kotlinOptions {
+                jvmTarget = "1.8"
+            }
+        }
+    }
 
     js {
         browser()
@@ -37,25 +43,20 @@ kotlin {
 
     applyDefaultHierarchyTemplate()
 
+    targets.all {
+        compilations.all {
+            compilerOptions.configure {
+                freeCompilerArgs.add("-Xexpect-actual-classes")
+            }
+        }
+    }
+
     sourceSets {
         getByName("jsMain") {
             dependencies {
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-node:18.11.19-pre.494")
             }
         }
-    }
-}
-
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    kotlinOptions {
-        jvmTarget = "1.8"
-        freeCompilerArgs += listOf("-Xexpect-actual-classes")
-    }
-}
-
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompileCommon> {
-    kotlinOptions {
-        freeCompilerArgs += listOf("-Xexpect-actual-classes")
     }
 }
 
