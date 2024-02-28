@@ -60,6 +60,8 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompileCommon> {
 }
 
 val ref = System.getenv()["GITHUB_REF"]
+println("GITHUB_REF: $ref")
+println("GITHUB_REF_TYPE: ${System.getenv()["GITHUB_REF_TYPE"]}")
 if (System.getenv()["GITHUB_REF_TYPE"] == "branch" && ref?.startsWith("refs/tags/v") == true) {
     val version = ref.removePrefix("refs/tags/v")
     println("Releasing Version: $version")
