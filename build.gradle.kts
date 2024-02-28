@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "io.github.scottpierce"
-version = "1.0.1"
+version = "1.0.0"
 
 repositories {
     mavenCentral()
@@ -63,7 +63,7 @@ mavenPublishing {
 
     signAllPublications()
 
-    coordinates("dev.scottpierce", "kotlin-env-var", "1.0.0")
+    coordinates("io.github.scottpierce", "kotlin-env-var", "1.0.0")
 
     pom {
         name.set("Kotlin Environment Variables")
