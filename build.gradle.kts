@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 import com.vanniktech.maven.publish.SonatypeHost
 
 plugins {
@@ -58,12 +60,15 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompileCommon> {
 }
 
 mavenPublishing {
-//    publishToMavenCentral(SonatypeHost.DEFAULT)
     publishToMavenCentral(SonatypeHost.S01, automaticRelease = true)
 
     signAllPublications()
 
-    coordinates("io.github.scottpierce", "kotlin-env-var", "1.0.0")
+    coordinates(
+        groupId = "io.github.scottpierce",
+        artifactId = "kotlin-env-var",
+        version = "1.0.0",
+    )
 
     pom {
         name.set("Kotlin Environment Variables")

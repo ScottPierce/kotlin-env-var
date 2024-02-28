@@ -26,6 +26,10 @@ A simple Kotlin Multiplatform library for retrieving environment variables.
 
 ## Usage:
 ```Kotlin
+implementation("io.github.scottpierce:kotlin-env-var:1.0.0")
+```
+
+```Kotlin
 val optionalEnvVar: String? = EnvVar["OPTIONAL_ENV_VAR"]
 val envVarWithDefault: String = EnvVar.get("ENV_VAR_WITH_DEFAULT") { "default" }
 
