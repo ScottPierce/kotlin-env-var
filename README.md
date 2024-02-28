@@ -1,6 +1,29 @@
 # kotlin-env-var
 A simple Kotlin Multiplatform library for retrieving environment variables.
 
+## Supported Platforms:
+```Kotlin
+    jvm()
+
+    js {
+        browser()
+        nodejs()
+    }
+
+    iosArm64()
+    iosX64()
+    iosSimulatorArm64()
+
+    tvosArm64()
+    tvosSimulatorArm64()
+    tvosX64()
+
+    macosArm64()
+    macosX64()
+
+    mingwX64()
+```
+
 ## Usage:
 ```Kotlin
 val optionalEnvVar: String? = EnvVar["OPTIONAL_ENV_VAR"]

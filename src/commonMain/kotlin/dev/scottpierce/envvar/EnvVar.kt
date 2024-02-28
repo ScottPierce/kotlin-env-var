@@ -1,8 +1,14 @@
 package dev.scottpierce.envvar
 
 object EnvVar {
+    /**
+     * Gets an environment variable as a [String] from the running platform, or returns null if it's not available.
+     */
     operator fun get(name: String): String? = EnvVarPlatform[name]
 
+    /**
+     * Gets an environment variable as a [String] from the running platform, or returns null if it's not available.
+     */
     operator fun get(name: String, required: Boolean): String? {
         val value = get(name)
         if (required && value == null) {

@@ -5,7 +5,7 @@ plugins {
     id("com.vanniktech.maven.publish") version "0.27.0"
 }
 
-group = "dev.scottpierce"
+group = "io.github.scottpierce"
 version = "1.0.0"
 
 repositories {
@@ -58,8 +58,8 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompileCommon> {
 }
 
 mavenPublishing {
-//    publishToMavenCentral(SonatypeHost.DEFAULT)
-    publishToMavenCentral(SonatypeHost.S01, automaticRelease = true)
+    publishToMavenCentral(SonatypeHost.DEFAULT)
+//    publishToMavenCentral(SonatypeHost.S01, automaticRelease = true)
 
     signAllPublications()
 
