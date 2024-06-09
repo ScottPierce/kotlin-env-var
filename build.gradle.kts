@@ -3,12 +3,9 @@
 import com.vanniktech.maven.publish.SonatypeHost
 
 plugins {
-    kotlin("multiplatform") version "1.9.22"
-    id("com.vanniktech.maven.publish") version "0.27.0"
+    kotlin("multiplatform") version "2.0.0"
+    id("com.vanniktech.maven.publish") version "0.28.0"
 }
-
-group = "io.github.scottpierce"
-version = "1.0.0"
 
 repositories {
     mavenCentral()
@@ -41,6 +38,9 @@ kotlin {
 
     mingwX64()
 
+    linuxX64()
+    linuxArm64()
+
     applyDefaultHierarchyTemplate()
 
     targets.all {
@@ -66,12 +66,12 @@ if (System.getenv()["GITHUB_REF_TYPE"] == "tag" && ref?.startsWith("refs/tags/v"
     println("Releasing Version: $version")
 
     mavenPublishing {
-        publishToMavenCentral(SonatypeHost.S01, automaticRelease = true)
+        publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, automaticRelease = true)
 
         signAllPublications()
 
         coordinates(
-            groupId = "io.github.scottpierce",
+            groupId = "dev.scottpierce",
             artifactId = "kotlin-env-var",
             version = version,
         )
