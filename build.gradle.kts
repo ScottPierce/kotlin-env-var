@@ -1,9 +1,10 @@
 @file:Suppress("UnstableApiUsage")
 
 import com.vanniktech.maven.publish.SonatypeHost
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
 plugins {
-    kotlin("multiplatform") version "2.0.0"
+    kotlin("multiplatform") version "2.1.0"
     id("com.vanniktech.maven.publish") version "0.28.0"
 }
 
@@ -41,17 +42,28 @@ kotlin {
     linuxX64()
     linuxArm64()
 
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmJs {
+        browser()
+        nodejs()
+        d8()
+    }
+
     applyDefaultHierarchyTemplate()
 
     targets.all {
         compilations.all {
-            compilerOptions.configure {
-                freeCompilerArgs.add("-Xexpect-actual-classes")
+            compileTaskProvider.configure {
+                compilerOptions.freeCompilerArgs.add("-Xexpect-actual-classes")
             }
         }
     }
 
     sourceSets {
+        commonTest.dependencies {
+            implementation(kotlin("test"))
+        }
+
         getByName("jsMain") {
             dependencies {
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-node:18.11.19-pre.494")
