@@ -4,8 +4,8 @@ import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
 plugins {
-    kotlin("multiplatform") version "2.1.0"
-    id("com.vanniktech.maven.publish") version "0.28.0"
+    kotlin("multiplatform") version "2.1.21"
+    id("com.vanniktech.maven.publish") version "0.32.0"
 }
 
 repositories {
